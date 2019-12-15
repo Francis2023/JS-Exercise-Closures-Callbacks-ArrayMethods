@@ -150,7 +150,7 @@ function processContains(item,list,callback) {
  * Implement a higher-order function called `processDuplicateFree`.
  * It takes two arguments:
  * @param list array of elements of any kind.
- * @param callback function that takes an array as its argument.
+ * @param callback function that takes an jarray as its argument.
  * @returns the result of invoking `callback` passing a de-duped version of `list`.
  * 
  * Examples of usage of this higher-order function:
@@ -160,8 +160,9 @@ function processContains(item,list,callback) {
  * [2] Invoking `processDuplicateFree` passing `[1,1,2,2,3]` and `(arr) => arr.length`,
  * should return 3.
 */
-function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS */) {
-  /* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS */
+function processDuplicateFree(list,callback) {
+  let newlist = [... new Set(list)];
+  return callback(newlist);
 }
 
 /////////////// HIGHER-ORDER ARRAY METHODS ///////////////
@@ -173,7 +174,7 @@ function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS
 // to attend the event along with a small donation.
 
 /**
- * ### Challenge `getFullNames`
+ * ### Challenge `getFullNames
  * 
  * @instructions
  * Implement this function using forEach().
@@ -182,8 +183,11 @@ function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS
  * @returns an array with all the runners' full names in the following format: "Smith, John".
  * The full names appear in the array in the same order the runners appear in the `runners` array.
 */
-function getFullNames(/* CODE HERE */) {
-  /* CODE HERE */
+function getFullNames(runners) {
+  let run = [];
+runners.forEach(runners => run.push(runners.last_name + "," + " " + runners.first_name));
+  return run;
+
 }
 
 /**
@@ -198,8 +202,9 @@ function getFullNames(/* CODE HERE */) {
  * @returns an array with all the runners' first names in ALL CAPS.
  * The first names appear in the array in the same order the runners appear in the `runners` array.
 */
-function firstNamesAllCaps(/* CODE HERE */) {
-  /* CODE HERE */
+function firstNamesAllCaps(runners) {
+  let cap = runners.map(runners => runners.first_name.toUpperCase());
+  return cap;
 }
 
 /**
@@ -215,8 +220,9 @@ function firstNamesAllCaps(/* CODE HERE */) {
  * @returns an array containing only the runners that use the given `tShirtSize`.
  * The runners in the array appear in the same order they appear in the `runners` array.
 */
-function getRunnersByTShirtSize(/* CODE HERE */) {
-  /* CODE HERE */
+function getRunnersByTShirtSize(runners,tShirtSize) {
+  let size = runners.filter(runners => runners.shirt_size == tShirtSize )
+  return size;
 }
 
 /**
@@ -229,8 +235,14 @@ function getRunnersByTShirtSize(/* CODE HERE */) {
  * @param runners array of runners like the one inside the /data/runners.js file.
  * @returns a number which is the sum of the donations by all runners.
 */
-function tallyUpDonations(/* CODE HERE */) {
-  /* CODE HERE */
+function tallyUpDonations(runners) {
+  
+  let don = runners.reduce(function(total,runners)  {
+      return total + runners.donation
+  },0);
+  
+  return don;
+  
 }
 
 /////////////// CLOSURES ///////////////
@@ -251,10 +263,12 @@ function tallyUpDonations(/* CODE HERE */) {
 */
 function counterMaker() {
   // BROKEN CODE STARTS
-  const count = 0;
+  let count = 0;
   function counter() {
-    ++count
+    
+    return count++;
   }
+return counter;
   // BROKEN CODE ENDS
 }
 
@@ -278,8 +292,16 @@ function counterMaker() {
  * counter() // should return 0
  * etc
 */
-function counterMakerWithLimit(/* CODE HERE */) {
-  /* CODE HERE */
+function counterMakerWithLimit(num) {
+  
+  let count = 0;
+  function counter(){
+   (count > num) ? count = 0 : count;
+   return count++;
+
+  }
+  return counter;
+
 }
 
 /////////////// END OF CHALLENGE ///////////////
